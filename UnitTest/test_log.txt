@@ -1,0 +1,16 @@
+2026-04-04 10:32:11 INFO Application started
+2026-04-04 10:32:12 INFO Loading configuration
+2026-04-04 10:32:13 WARNING Missing optional config: theme
+2026-04-04 10:32:14 ERROR Failed to connect to database
+2026-04-04 10:32:15 INFO Retrying connection
+2026-04-04 10:32:16 ERROR Failed to connect to database
+2026-04-04 10:32:17 ERROR Timeout while connecting to database
+2026-04-04 10:32:18 INFO User login attempt
+2026-04-04 10:32:19 WARNING Slow response detected
+2026-04-04 10:32:20 INFO User login successful
+2026-04-04 10:32:21 ERROR NullReferenceException in UserService
+2026-04-04 10:32:22 ERROR NullReferenceException in UserService
+2026-04-04 10:32:23 INFO Background job started
+2026-04-04 10:32:24 WARNING Disk usage at 85%
+2026-04-04 10:32:25 ERROR Failed to write to disk
+2026-04-04 10:32:26 INFO Application shutting down
