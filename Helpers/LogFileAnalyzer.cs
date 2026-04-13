@@ -47,7 +47,7 @@ namespace LogTool.Helpers
                         if (level == ErrorKey)
                         {
                             msgIndex = line.IndexOf(level);
-                            UpdateDict(details, line.Substring(msgIndex + level.Length + 1).Trim());
+                            UpdateDict(details, line.Substring(msgIndex + level.Length).Trim());
                         }
                     }
                 }
