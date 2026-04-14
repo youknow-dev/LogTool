@@ -5,51 +5,46 @@ namespace LogTool
 {
     public class Program
     {
-        private static void PrintErrorInformation(Dictionary<string, int> errorCounts, Dictionary<string, int> levels, int lineCount)
+        private static void PrintHelp()
         {
-            Console.WriteLine("Log Analysis Summary");
-            Console.WriteLine("-------------------");
-            Console.WriteLine();
-            Console.WriteLine($"Total Lines: {lineCount}");
-            foreach (var (name, count) in levels)
-            {
-                Console.WriteLine($"Total {name}: {count}");
-            }
-            
-            if (errorCounts.Count > 0)
-            {
-                Console.WriteLine();
-                Console.WriteLine("Top Errors:");
-                foreach (var (error, count) in errorCounts.OrderByDescending(kvp => kvp.Value).Take(10))
-                {
-                    Console.WriteLine($"- {error}: {count}");
-                }
-            }
+            Console.WriteLine("--help:\tdisplay help information");
+            Console.WriteLine("--file:\tenter the log file to parse");
+            Console.WriteLine("--top:\tset the number of most common errors to display");
+            Console.WriteLine("--output:\tset the output type");  
         }
 
         public static int Main(string[] args)
         {
-            if (args.Length < 1)
+            var parseResults = new ArgumentParser().Parse(args);
+            
+            if (parseResults.DisplayHelp)
             {
-                Console.WriteLine("Not enough input arguments");
-                return 1;
+                PrintHelp();
             }
-
-            var logpath = args[0];
-
-            if (File.Exists(logpath))
+            else if (parseResults.Success)
             {
-                // analyze file
-                var errorCounts = new Dictionary<string, int>();
-                var (levels, lineCount) = new LogFileAnalyzer().Analyze(logpath, errorCounts);
+                var logpath = parseResults.Arguments?.Files.FirstOrDefault();
 
-                // print report to terminal
-                PrintErrorInformation(errorCounts, levels, lineCount);
+                if (File.Exists(logpath))
+                {
+                    // analyze file
+                    var errorCounts = new Dictionary<string, int>();
+                    var (levels, lineCount) = new LogFileAnalyzer().Analyze(logpath, errorCounts, parseResults.Arguments?.Level);
+
+                    // print report to terminal
+                    parseResults.Arguments?.OutputType.Print(parseResults.Arguments, errorCounts, levels, lineCount);
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to find log file: '{logpath}'");
+                    return 2;
+                }
             }
             else
             {
-                Console.WriteLine($"Failed to find log file: '{logpath}'");
-                return 2;
+                Console.WriteLine("Parse Error:");
+                Console.WriteLine(parseResults.ErrorMessage);   
+                return 1;
             }
 
             return 0;

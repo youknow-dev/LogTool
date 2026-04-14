@@ -4,7 +4,7 @@ namespace LogTool.Helpers
     {
         private Dictionary<string, int> levels;
 
-        private readonly string ErrorKey = "ERROR";
+        private const string ErrorKey = "ERROR";
 
         public LogFileAnalyzer()
         {
@@ -28,9 +28,10 @@ namespace LogTool.Helpers
             }
         }
 
-        public (Dictionary<string, int> levels, int lineCount) Analyze(string logpath, Dictionary<string, int> details)
+        public (Dictionary<string, int> levels, int lineCount) Analyze(
+            string logpath, Dictionary<string, int> details, string theLevel = ErrorKey)
         {
-            int msgIndex = 0;
+            int msgIndex;
             int numLines = 0;
             foreach (var line in File.ReadLines(logpath))
             {
@@ -44,7 +45,7 @@ namespace LogTool.Helpers
                     {
                         levels[level]++;
                 
-                        if (level == ErrorKey)
+                        if (level == theLevel)
                         {
                             msgIndex = line.IndexOf(level);
                             UpdateDict(details, line.Substring(msgIndex + level.Length).Trim());
