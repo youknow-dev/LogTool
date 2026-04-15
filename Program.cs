@@ -1,5 +1,4 @@
-﻿using System;
-using LogTool.Helpers;
+﻿using LogTool.Helpers;
 
 namespace LogTool
 {
@@ -28,11 +27,10 @@ namespace LogTool
                 if (File.Exists(logpath))
                 {
                     // analyze file
-                    var errorCounts = new Dictionary<string, int>();
-                    var (levels, lineCount) = new LogFileAnalyzer().Analyze(logpath, errorCounts, parseResults.Arguments?.Level);
+                    var logData = new LogFileAnalyzer().Analyze(logpath, parseResults.Arguments?.Level);
 
                     // print report to terminal
-                    parseResults.Arguments?.OutputType.Print(parseResults.Arguments, errorCounts, levels, lineCount);
+                    parseResults.Arguments?.OutputType.Print(parseResults.Arguments, logData);
                 }
                 else
                 {

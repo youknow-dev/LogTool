@@ -4,8 +4,6 @@ namespace LogTool.Helpers
     {
         void Print(
             Arguments args,
-            Dictionary<string, int> errorCounts,
-            Dictionary<string, int> levels,
-            int lineCount);
+            LogFileData logFileData);
     }
 }
