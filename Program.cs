@@ -53,7 +53,8 @@ namespace LogTool
             else
             {
                 Console.WriteLine("Parse Error:");
-                Console.WriteLine(parseResults.ErrorMessage);   
+                Console.WriteLine($"  {parseResults.ErrorMessage}"); 
+                Console.WriteLine();  
                 return 1;
             }
 

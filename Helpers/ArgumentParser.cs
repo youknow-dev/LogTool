@@ -83,6 +83,9 @@ namespace LogTool.Helpers
                 i++;
             }
 
+            if (files.Count == 0)
+                return new ParseResults(false, null, "No log path entered. Aborting analysis.", false);
+
             return new ParseResults(
                 true,
                 new Arguments(
