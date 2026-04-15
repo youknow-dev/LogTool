@@ -8,12 +8,12 @@ namespace LogTool.Helpers
 
     public class LogFileAnalyzer
     {
-        private readonly HashSet<string> registeredLevels = [];
-
-        public void RegisterLevel(string level)
-        {
-            registeredLevels.Add(level);
-        }
+        private readonly HashSet<string> registeredLevels =
+        [
+            "ERROR",
+            "WARNING",
+            "INFO"
+        ];
 
         private Dictionary<string, int> BuildLevelDictionary()
         {
