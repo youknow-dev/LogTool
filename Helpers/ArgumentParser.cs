@@ -44,9 +44,10 @@ namespace LogTool.Helpers
                     {
                         case "--level":
                             i++;
-                            if (i < args.Length && (args[i] == "ERROR" || args[i] == "INFO" || args[i] == "WARNING"))
+                            string temp = args[i].ToUpper(); 
+                            if (i < args.Length && (temp == "ERROR" || temp == "INFO" || temp == "WARNING"))
                             {
-                                level = args[i];
+                                level = temp;
                                 break;
                             }
                             else return ReturnErrorResults("--level", i < args.Length ? args[i] : null);
