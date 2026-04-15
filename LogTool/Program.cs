@@ -52,9 +52,11 @@ namespace LogTool
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Parse Error:");
                 Console.WriteLine($"  {parseResults.ErrorMessage}"); 
-                Console.WriteLine();  
+                Console.WriteLine();
+                Console.ResetColor(); // probably not needed
                 return 1;
             }
 

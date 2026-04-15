@@ -72,17 +72,9 @@ namespace LogTool.Helpers
                                 if (val > 0)
                                 {
                                     top = val;
+                                    break;
                                 }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Yellow;
-                                    Console.Write($"incoming val ({val}) for top is an invalid entry. Current value for top: ");
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.WriteLine($"{top}");
-                                    Console.WriteLine("");
-                                    Console.ResetColor();
-                                }
-                                break;
+                                else return ReturnErrorResults("--top", args[i]);
                             }
                             else return ReturnErrorResults("--top", i < args.Length ? args[i] : null);
                         case "--help":

@@ -1,0 +1,11 @@
+Log Analysis Summary
+-------------------
+
+Total Lines: 16
+Total ERROR: 6
+Total WARNING: 3
+Total INFO: 7
+
+Top Errors:
+- Failed to connect to database: 2
+- NullReferenceException in UserService: 2
