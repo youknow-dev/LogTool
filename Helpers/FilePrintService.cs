@@ -24,8 +24,8 @@ namespace LogTool.Helpers
             if (logFileData.MessageCount.Count > 0)
             {
                 writer.WriteLine();
-                writer.WriteLine("Top Errors:");
-                foreach (var (error, count) in logFileData.MessageCount.OrderByDescending(kvp => kvp.Value).Take(args.NumErrorOutput))
+                writer.WriteLine($"Top {args.Level}s:");
+                foreach (var (error, count) in logFileData.MessageCount.OrderByDescending(kvp => kvp.Value).Take(args.NumMessageCount))
                 {
                     writer.WriteLine($"- {error}: {count}");
                 }

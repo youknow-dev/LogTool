@@ -2,7 +2,7 @@ namespace LogTool.Helpers
 {
     public record Arguments(
         IEnumerable<string> Files,
-        int NumErrorOutput,
+        int NumMessageCount,
         IPrintService OutputType,
         string Level
     );

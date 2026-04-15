@@ -16,8 +16,8 @@ namespace LogTool.Helpers
             if (logFileData.MessageCount.Count > 0)
             {
                 Console.WriteLine();
-                Console.WriteLine("Top Errors:");
-                foreach (var (error, count) in logFileData.MessageCount.OrderByDescending(kvp => kvp.Value).Take(args.NumErrorOutput))
+                Console.WriteLine($"Top {args.Level}s:");
+                foreach (var (error, count) in logFileData.MessageCount.OrderByDescending(kvp => kvp.Value).Take(args.NumMessageCount))
                 {
                     Console.WriteLine($"- {error}: {count}");
                 }
