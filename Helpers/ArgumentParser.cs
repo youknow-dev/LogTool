@@ -70,7 +70,19 @@ namespace LogTool.Helpers
                             i++;
                             if (i < args.Length && int.TryParse(args[i], out int val))
                             {
-                                top = val;
+                                if (val > 0)
+                                {
+                                    top = val;
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Yellow;
+                                    Console.Write($"incoming val ({val}) for top is an invalid entry. Current value for top: ");
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine($"{top}");
+                                    Console.WriteLine("");
+                                    Console.ResetColor();
+                                }
                                 break;
                             }
                             else return ReturnErrorResults("--top", i < args.Length ? args[i] : null);
