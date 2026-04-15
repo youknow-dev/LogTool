@@ -6,10 +6,21 @@ namespace LogTool
     {
         private static void PrintHelp()
         {
-            Console.WriteLine("--help:\tdisplay help information");
-            Console.WriteLine("--file:\tenter the log file to parse");
-            Console.WriteLine("--top:\tset the number of most common errors to display");
-            Console.WriteLine("--output:\tset the output type");  
+            Console.WriteLine("Description:");
+            Console.WriteLine("  Scan log file for most prominent logs by level");
+            Console.WriteLine();
+            Console.WriteLine("Usage:");
+            Console.WriteLine("  .\\LogTool.exe [<filepath>] [options]");
+            Console.WriteLine();
+            Console.WriteLine("Arguments:");
+            Console.WriteLine("  <filepath>\tthe path to the log file");
+            Console.WriteLine();
+            Console.WriteLine("Options:");
+            Console.WriteLine("  --top <n>\t\t\t\tset the number of most common errors to display");
+            Console.WriteLine("  --level <ERROR | WARNING | INFO>\tset the information level to print");
+            Console.WriteLine("  --output <type | filepath>:\t\tset the output type for the log file information");
+            Console.WriteLine("  --help\t\t\t\tdisplay help information");
+            Console.WriteLine();
         }
 
         public static int Main(string[] args)
