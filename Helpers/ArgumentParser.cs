@@ -44,25 +44,24 @@ namespace LogTool.Helpers
                     {
                         case "--level":
                             i++;
-                            string temp = args[i].ToUpper(); 
-                            if (i < args.Length && (temp == "ERROR" || temp == "INFO" || temp == "WARNING"))
+                            if (i < args.Length)
                             {
-                                level = temp;
+                                string temp = args[i].ToUpperInvariant(); 
+                                if(temp == "ERROR" || temp == "INFO" || temp == "WARNING")
+                                {
+                                    level = temp;   
+                                }
                                 break;
                             }
                             else return ReturnErrorResults("--level", i < args.Length ? args[i] : null);
                         case "--output":
                             i++;
-                            if (i < args.Length && (args[i] == "console" || Path.HasExtension(args[i])))
+                            if (i < args.Length)
                             {
-                                if (args[i] == "console")
-                                {
-                                    outputType = new TerminalPrintService();
-                                }
-                                else
-                                {
-                                    outputType = new FilePrintService(args[i]);
-                                }
+                                outputType = args[i] == "console"
+                                    ? new TerminalPrintService()
+                                    : new FilePrintService(args[i]);
+
                                 break;
                             }
                             else return ReturnErrorResults("--output", i < args.Length ? args[i] : null);
