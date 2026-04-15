@@ -33,15 +33,16 @@ namespace LogTool
             }
             else if (parseResults.Success)
             {
-                var logpath = parseResults.Arguments?.Files.FirstOrDefault();
+                var arguments = parseResults.Arguments;
+                var logpath = arguments?.Files.FirstOrDefault();
 
                 if (File.Exists(logpath))
                 {
                     // analyze file
-                    var logData = new LogFileAnalyzer().Analyze(logpath, parseResults.Arguments?.Level);
+                    var logData = new LogFileAnalyzer().Analyze(logpath, arguments!.Level);
 
                     // print report to terminal
-                    parseResults.Arguments?.OutputType.Print(parseResults.Arguments, logData);
+                    arguments!.OutputType.Print(arguments, logData);
                 }
                 else
                 {
