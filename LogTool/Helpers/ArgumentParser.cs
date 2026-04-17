@@ -47,10 +47,11 @@ namespace LogTool.Helpers
                             if (i < args.Length)
                             {
                                 string temp = args[i].ToUpperInvariant(); 
-                                if(temp == "ERROR" || temp == "INFO" || temp == "WARNING")
+                                if (temp == "ERROR" || temp == "INFO" || temp == "WARNING")
                                 {
                                     level = temp;   
                                 }
+                                else return ReturnErrorResults("--level", args[i]);
                                 break;
                             }
                             else return ReturnErrorResults("--level", i < args.Length ? args[i] : null);
