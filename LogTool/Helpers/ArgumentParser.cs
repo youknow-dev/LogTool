@@ -1,3 +1,5 @@
+using LogTool.Services.PrintServices;
+
 namespace LogTool.Helpers
 {
     public record Arguments(

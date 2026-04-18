@@ -1,4 +1,5 @@
 ﻿using LogTool.Helpers;
+using LogTool.Services.PrintServices;
 
 namespace LogTool.Tests.Tests
 {

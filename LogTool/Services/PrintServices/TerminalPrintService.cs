@@ -1,4 +1,6 @@
-namespace LogTool.Helpers
+using LogTool.Helpers;
+
+namespace LogTool.Services.PrintServices
 {
     public class TerminalPrintService : IPrintService
     {
