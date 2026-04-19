@@ -5,7 +5,7 @@ namespace LogTool.Helpers
     public record Arguments(
         IEnumerable<string> Files,
         int NumMessageCount,
-        IPrintService OutputType,
+        string OutputType,
         string Level
     );
 
@@ -32,7 +32,7 @@ namespace LogTool.Helpers
             var files = new List<string>();
             int top = 10;
             string level = "ERROR";
-            IPrintService outputType = new TerminalPrintService(); // defaulted
+            string outputType = "console"; // defaulted
 
             int i = 0;
             string token;
@@ -61,10 +61,7 @@ namespace LogTool.Helpers
                             i++;
                             if (i < args.Length)
                             {
-                                outputType = args[i] == "console"
-                                    ? new TerminalPrintService()
-                                    : new FilePrintService(args[i]);
-
+                                outputType = args[i];
                                 break;
                             }
                             else return ReturnErrorResults("--output", i < args.Length ? args[i] : null);

@@ -1,9 +1,17 @@
 ﻿using LogTool.Helpers;
+using LogTool.Services;
 
 namespace LogTool
 {
     public class Program
     {
+        private static PrintServiceFactory printServiceFactory;
+
+        static Program()
+        {
+            printServiceFactory = new PrintServiceFactory();
+        }
+
         private static void PrintHelp()
         {
             Console.WriteLine("Description:");
@@ -42,7 +50,8 @@ namespace LogTool
                     var logData = new LogFileAnalyzer().Analyze(logpath, arguments!.Level);
 
                     // print report to terminal
-                    arguments!.OutputType.Print(arguments, logData);
+                    var printService = printServiceFactory.Create(arguments!.OutputType);
+                    printService.Print(arguments, logData);
                 }
                 else
                 {
