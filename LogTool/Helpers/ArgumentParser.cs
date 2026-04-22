@@ -1,3 +1,4 @@
+using LogTool.Services;
 using LogTool.Services.PrintServices;
 
 namespace LogTool.Helpers
@@ -5,7 +6,7 @@ namespace LogTool.Helpers
     public record Arguments(
         IEnumerable<string> Files,
         int NumMessageCount,
-        string OutputType,
+        OutputType OutputType,
         string Level
     );
 
@@ -32,7 +33,7 @@ namespace LogTool.Helpers
             var files = new List<string>();
             int top = 10;
             string level = "ERROR";
-            string outputType = "console"; // defaulted
+            OutputType outputType = OutputType.Console; // defaulted
 
             int i = 0;
             string token;
@@ -61,7 +62,11 @@ namespace LogTool.Helpers
                             i++;
                             if (i < args.Length)
                             {
-                                outputType = args[i];
+                                outputType = args[i] switch
+                                {
+                                    "console" => OutputType.Console,
+                                    _ => OutputType.TextFile
+                                };
                                 break;
                             }
                             else return ReturnErrorResults("--output", i < args.Length ? args[i] : null);

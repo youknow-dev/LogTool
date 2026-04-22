@@ -2,30 +2,43 @@ using LogTool.Services.PrintServices;
 
 namespace LogTool.Services
 {
+    public enum OutputType
+    {
+        Console = 1,
+        TextFile = 2,
+        JsonFile = 4,
+        XmlFile = 8
+    }
+
     /// <summary>
     /// Factory for the creating new instance of <see cref="IPrintService"/> 
     /// </summary>
     public class PrintServiceFactory
     {
-        private readonly Dictionary<string, Func<string, IPrintService>> factory = new()
+        private readonly Dictionary<OutputType, Func<string, IPrintService>> factory = new()
         {
-          {"console", (target) => new TerminalPrintService()},
-          {"file", (target) => new FilePrintService(target)}, // default
+          {OutputType.Console, (target) => new TerminalPrintService()},
+          {OutputType.TextFile, (target) => new FilePrintService(target)},
+          {OutputType.JsonFile, (target) => throw new NotImplementedException()},
+          {OutputType.XmlFile, (target) => throw new NotImplementedException()},
         };
 
         /// <summary>
         /// Create a new print service based on the desired target
         /// </summary>
-        /// <param name="target">the location to direct print toward</param>
+        /// <param name="targetType">the location to direct print toward</param>
+        /// <param name="targetPath">the path to the file</param>
         /// <returns>The print service</returns>
-        public IPrintService Create(string target)
+        /// <exception cref="InvalidOperationException"></exception>
+        public IPrintService Create(OutputType targetType, string targetPath = "")
         {
-            if (factory.TryGetValue(target, out var create))
+            if (factory.TryGetValue(targetType, out var create))
             {
-                return create(target);
+                return create(targetPath);
             }
             
-            return factory["file"](target); // default
+            string errMessage = $"Print service factory does not contain the following type: '{targetType}'";
+            throw new InvalidOperationException(errMessage);
         }
     }
 }
