@@ -26,7 +26,7 @@ namespace LogTool
             Console.WriteLine("Options:");
             Console.WriteLine("  --top <n>\t\t\t\tset the number of most common errors to display");
             Console.WriteLine("  --level <ERROR | WARNING | INFO>\tset the information level to print");
-            Console.WriteLine("  --output <type | filepath>:\t\tset the output type for the log file information");
+            Console.WriteLine("  --output <console | filepath>:\t\tset the output type for the log file information");
             Console.WriteLine("  --help\t\t\t\tdisplay help information");
             Console.WriteLine();
         }
