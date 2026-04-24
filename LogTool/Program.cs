@@ -50,7 +50,7 @@ namespace LogTool
                     var logData = new LogFileAnalyzer().Analyze(logpath, arguments!.Level);
 
                     // print report to terminal
-                    var printService = printServiceFactory.Create(arguments!.OutputType);
+                    var printService = printServiceFactory.Create(arguments!.OutputType, arguments.OutputPath);
                     printService.Print(arguments, logData);
                 }
                 else
