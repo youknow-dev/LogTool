@@ -2,7 +2,7 @@ using LogTool.Helpers;
 
 namespace LogTool.Services.PrintServices
 {
-    public class FilePrintService : IPrintService
+    public class FilePrintService : BasePrintService
     {
         private readonly string outputPath;
 
@@ -11,26 +11,12 @@ namespace LogTool.Services.PrintServices
             this.outputPath = outputPath;
         }
 
-        public void Print(Arguments args, LogFileData logFileData)
+        public override void Print(Arguments args, LogFileData logFileData)
         {
             using var writer = new StreamWriter(outputPath);
-            writer.WriteLine("Log Analysis Summary");
-            writer.WriteLine("-------------------");
-            writer.WriteLine();
-            writer.WriteLine($"Total Lines: {logFileData.NumLines}");
-            foreach (var (name, count) in logFileData.LevelCount)
+            foreach (var line in FormatMessage(args, logFileData))
             {
-                writer.WriteLine($"Total {name}: {count}");
-            }
-            
-            if (logFileData.MessageCount.Count > 0)
-            {
-                writer.WriteLine();
-                writer.WriteLine($"Top {args.Level}s:");
-                foreach (var (error, count) in logFileData.MessageCount.OrderByDescending(kvp => kvp.Value).Take(args.NumMessageCount))
-                {
-                    writer.WriteLine($"- {error}: {count}");
-                }
+                writer.WriteLine(line);
             }
         }
     }
