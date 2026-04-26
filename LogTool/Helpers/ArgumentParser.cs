@@ -18,7 +18,7 @@ namespace LogTool.Helpers
 
             var files = new List<string>();
             int top = 10;
-            string level = "ERROR";
+            ErrorLevel level = ErrorLevel.Error;
             OutputType outputType = OutputType.Console; // defaulted
             string? outputPath = null;
 
@@ -36,15 +36,17 @@ namespace LogTool.Helpers
                             i++;
                             if (i < args.Length)
                             {
-                                string temp = args[i].ToUpperInvariant(); 
-                                if (temp == "ERROR" || temp == "INFO" || temp == "WARNING")
+                                (bool parseSuccess, ErrorLevel? newLevel, string? badFlag) = ParseLevel(args[i]);
+                                
+                                if (newLevel is null)
                                 {
-                                    level = temp;   
+                                    return ReturnErrorResults("--level", badFlag);
                                 }
-                                else return ReturnErrorResults("--level", args[i]);
+                                
+                                level = (ErrorLevel)newLevel;
                                 break;
                             }
-                            else return ReturnErrorResults("--level", i < args.Length ? args[i] : null);
+                            else return ReturnErrorResults("--level", null);
                         case "--output":
                             i++;
                             if (i < args.Length)
@@ -56,7 +58,7 @@ namespace LogTool.Helpers
                                         outputPath = null;
                                         break;
                                     default:
-                                        outputType = OutputType.TextFile;
+                                        outputType = OutputType.Text;
                                         outputPath = args[i];
                                         break;
                                 }
@@ -99,6 +101,24 @@ namespace LogTool.Helpers
                 string.Empty,
                 false
             );
+        }
+
+        private static (bool parseSuccess, ErrorLevel? level, string? badFlag) ParseLevel(string token)
+        {
+            string[] tokens = token.Split(',');
+
+            ErrorLevel? result = null;
+
+            foreach (var flag in tokens)
+            {
+                if (Enum.TryParse<ErrorLevel>(flag.Trim(), ignoreCase: true, out var level))
+                {
+                    result = result is null ? level : result | level;
+                }
+                else return (false, null, flag);
+            }
+
+            return (true, result, null);
         }
     }
 }

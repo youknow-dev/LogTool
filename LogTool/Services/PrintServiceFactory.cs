@@ -5,9 +5,9 @@ namespace LogTool.Services
     public enum OutputType
     {
         Console = 1,
-        TextFile = 2,
-        JsonFile = 4,
-        XmlFile = 8
+        Text = 2,
+        Json = 4,
+        Xml = 8
     }
 
     /// <summary>
@@ -18,9 +18,9 @@ namespace LogTool.Services
         private readonly Dictionary<OutputType, Func<string, IPrintService>> factory = new()
         {
           {OutputType.Console, (target) => new TerminalPrintService()},
-          {OutputType.TextFile, (target) => new FilePrintService(target)},
-          {OutputType.JsonFile, (target) => throw new NotImplementedException()},
-          {OutputType.XmlFile, (target) => throw new NotImplementedException()},
+          {OutputType.Text, (target) => new FilePrintService(target)},
+          {OutputType.Json, (target) => throw new NotImplementedException()},
+          {OutputType.Xml, (target) => throw new NotImplementedException()},
         };
 
         /// <summary>

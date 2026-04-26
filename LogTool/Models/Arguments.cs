@@ -7,6 +7,6 @@ namespace LogTool.Models
         int NumMessageCount,
         OutputType OutputType,
         string? OutputPath,
-        string Level
+        ErrorLevel Level
     );
 }
