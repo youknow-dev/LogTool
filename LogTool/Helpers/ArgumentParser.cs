@@ -38,7 +38,7 @@ namespace LogTool.Helpers
                             {
                                 (bool parseSuccess, ErrorLevel? newLevel, string? badFlag) = ParseLevel(args[i]);
                                 
-                                if (newLevel is null)
+                                if (!parseSuccess || newLevel is null)
                                 {
                                     return ReturnErrorResults("--level", badFlag);
                                 }
