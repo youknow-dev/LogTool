@@ -6,6 +6,8 @@ Total ERROR: 6
 Total WARNING: 3
 Total INFO: 7
 
-Top Errors:
+Top ERRORs:
 - Failed to connect to database: 2
 - NullReferenceException in UserService: 2
+- Timeout while connecting to database: 1
+- Failed to write to disk: 1

@@ -1,4 +1,5 @@
 using LogTool.Helpers;
+using LogTool.Models;
 
 namespace LogTool.Services.PrintServices
 {

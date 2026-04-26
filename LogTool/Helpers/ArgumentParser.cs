@@ -1,22 +1,8 @@
 using LogTool.Services;
+using LogTool.Models;
 
 namespace LogTool.Helpers
 {
-    public record Arguments(
-        IEnumerable<string> Files,
-        int NumMessageCount,
-        OutputType OutputType,
-        string? OutputPath,
-        string Level
-    );
-
-    public record ParseResults(
-        bool Success,
-        Arguments? Arguments,
-        string ErrorMessage,
-        bool DisplayHelp
-    );
-
     public class ArgumentParser
     {
         private ParseResults ReturnErrorResults(string tokenName, string? arg = null)
